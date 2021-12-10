@@ -14,3 +14,14 @@ C:\play\advent-of-code-2021\obj\Debug\net5.0\advent-of-code-2021.dll
 C:\play\advent-of-code-2021\obj\Debug\net5.0\ref\advent-of-code-2021.dll
 C:\play\advent-of-code-2021\obj\Debug\net5.0\advent-of-code-2021.pdb
 C:\play\advent-of-code-2021\obj\Debug\net5.0\advent-of-code-2021.genruntimeconfig.cache
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.Logging.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\play\advent-of-code-2021\obj\Debug\net5.0\advent-of-code-2021.csproj.CopyComplete
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Serilog.dll
+C:\play\advent-of-code-2021\bin\Debug\net5.0\Serilog.Sinks.File.dll
