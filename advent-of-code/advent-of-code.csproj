@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>advent_of_code_2021</RootNamespace>
+    <StartupObject>advent_of_code_2021.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
