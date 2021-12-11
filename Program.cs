@@ -2,60 +2,65 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Serilog;
+using advent_of_code_2021.DataRepository;
 
 namespace advent_of_code_2021
 {
     class Program
     {
-        private static readonly ILogger logger = new LoggerFactory().CreateLogger("Startup");
-
-        static void Main(string[] args)
+        
+        public static void Main(string[] args)
         {
+
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+
+
+            logger.Information("TEST");
+
             Console.WriteLine("Hello Advent of Code !");
-            logger.LogInformation("Hello Advent of Code !");
-            
-            if (File.Exists("data/d01_input.txt")) 
-            {
-                string[] lines = File.ReadAllLines("data/d01_input.txt");
-                string[] travelDirections = File.ReadAllLines("data/d02_position.txt");                
-                //string[] diagnosticLines = File.ReadAllLines("data/d02_position.txt");  
-                string[] diagnosticLines = File.ReadAllLines("data/d03_diagnostics.txt");  
-                //string[] lines = File.ReadAllLines("data/test.txt");
 
-                List<int> measurements = lines.Select(x => int.Parse(x)).ToList();
 
-                int increatingCount = countIncreatingMeasurements(measurements);
-                Console.WriteLine($"Increaments single: {increatingCount}");
+            logger.Information("\r\nHello Advent of Code !");
+            Repository repository = new Repository(logger,"DataRepository/Data/");
 
-                int increasingCountWindow = countSlidingWindow(measurements);
-                Console.WriteLine($"Increaments window: {increasingCountWindow}");
 
-                Position position = new Position();
-                position.TravelBasicsFromDirectionList(travelDirections.ToList());
-                print(position.PrintPosition()); 
-                print($"Basics:  {position.PrintPosition()} . multiplication: {position.horizontal * position.depth}"); 
-                
+            // depth measurements
+            List<int> depthMeasurements = repository.depthMeasurements.Select(x => int.Parse(x)).ToList();
+            int increatingCount = countIncreatingMeasurements(depthMeasurements);
+            Console.WriteLine($"Increaments single: {increatingCount}");
+            int increasingCountWindow = countSlidingWindow(depthMeasurements);
+            Console.WriteLine($"Increaments window: {increasingCountWindow}");
 
-                Position positionWithAim = new Position();
-                positionWithAim.TravelWithAimFromDirectionList(travelDirections.ToList());
-                print($"With Aim:  {positionWithAim.PrintPosition()} . multiplication: {positionWithAim.horizontal * positionWithAim.depth}"); 
-                
 
-                
+            // position with Aim
+            Position position = new Position();
+            position.TravelBasicsFromDirectionList(repository.travelDirections.ToList());
+            print(position.PrintPosition());
+            print($"Basics:  {position.PrintPosition()} . multiplication: {position.horizontal * position.depth}");
 
-                Diagnostics d = new Diagnostics();
-                d.LoadDiagnostics(diagnosticLines.ToList());
+            Position positionWithAim = new Position();
+            positionWithAim.TravelWithAimFromDirectionList(repository.travelDirections.ToList());
+            print($"With Aim:  {positionWithAim.PrintPosition()} . multiplication: {positionWithAim.horizontal * positionWithAim.depth}");
 
-                print($"PowerConsumption: {d.PowerConsumption}");            
-                print($"OxygenGeneration: {d.OxygenGeneration}");
-                print($"CO2 Scrubber rating: {d.CO2ScrubberRating}");
-                print($"Life support rating: {d.LifeSupportRating}");
-                
-               
-            }
-                
+            // diagnostics
+
+            Diagnostics d = new Diagnostics();
+            d.LoadDiagnostics(repository.diagnostics.ToList());
+            print($"PowerConsumption: {d.PowerConsumption}");
+            print($"OxygenGeneration: {d.OxygenGeneration}");
+            print($"CO2 Scrubber rating: {d.CO2ScrubberRating}");
+            print($"Life support rating: {d.LifeSupportRating}");                           
         }
+
+
 
 
         private static int countIncreatingMeasurements(List<int> measurements) 
