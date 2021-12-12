@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace advent_of_code_2021
+namespace advent_of_code
 {
     public class Diagnostics
     {

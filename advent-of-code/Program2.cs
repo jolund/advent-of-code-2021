@@ -5,11 +5,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace advent_of_code_2021
+namespace advent_of_code
 {
     public class Program2
     {
-        static void Main1(string[] args)
+        void Main1(string[] args)
         {
 
             var configuration = new ConfigurationBuilder()
@@ -22,8 +22,8 @@ namespace advent_of_code_2021
 
             logger.Information("TEST");
             var host = CreateHostBuilder(args).Build();
-            Worker w = host.Services.GetRequiredService<Worker>();
-            w.SayHello();                        
+            //Worker w = host.Services.GetRequiredService<Worker>();
+            //w.SayHello();                        
 
         }
 
@@ -31,7 +31,7 @@ namespace advent_of_code_2021
         Host.CreateDefaultBuilder(args)   
             .ConfigureServices((hostContext, services) =>
                 {
-                   services.AddTransient<Worker>();                  
+                   //services.AddTransient<Worker>();                  
                 })           
             .ConfigureLogging((_, logging) => 
                 {

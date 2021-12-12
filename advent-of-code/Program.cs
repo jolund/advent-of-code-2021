@@ -4,9 +4,11 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Serilog;
-using advent_of_code_2021.DataRepository;
+using advent_of_code.DataRepository;
+using advent_of_code.BingoSubSystem;
+using advent_of_code.HydrothermalDectionSubSystem;
 
-namespace advent_of_code_2021
+namespace advent_of_code
 {
     class Program
     {
@@ -27,9 +29,9 @@ namespace advent_of_code_2021
 
             Console.WriteLine("Hello Advent of Code !");
 
-
             logger.Information("\r\nHello Advent of Code !");
             Repository repository = new Repository(logger,"DataRepository/Data/");
+            Repository testRepository = new Repository(logger, "DataRepository/Test/");
 
 
             // depth measurements
@@ -57,7 +59,29 @@ namespace advent_of_code_2021
             print($"PowerConsumption: {d.PowerConsumption}");
             print($"OxygenGeneration: {d.OxygenGeneration}");
             print($"CO2 Scrubber rating: {d.CO2ScrubberRating}");
-            print($"Life support rating: {d.LifeSupportRating}");                           
+            print($"Life support rating: {d.LifeSupportRating}");                         
+            
+            // Bingo Game
+            BingoGame bingoGame = new BingoGame(logger);
+            bingoGame.InitializeGame(repository.bingoInput);
+            bingoGame.RunGame();
+
+            print(bingoGame.PrintWinnerRound());
+            print(bingoGame.PrintLastBoardWinningRound());
+
+            
+            HydrothermalVentDetection htvd = new HydrothermalVentDetection(logger);
+            htvd.InitializeData(repository.hydrothermalVents);            
+            htvd.DrawHorizontalAndVerticalLinesOnMap();            
+            print($"Number of crossings (H and V): {htvd.countOnMap()}");
+            logger.Information($"Number of crossings (H and V): {htvd.countOnMap()}");
+                        
+            htvd.InitializeData(repository.hydrothermalVents);
+            htvd.DrawHAllLinesOnMap();
+            print($"Number of crossings (all lines): {htvd.countOnMap()}");
+            logger.Information($"Number of crossings (all lines): {htvd.countOnMap()}");
+            
+
         }
 
 

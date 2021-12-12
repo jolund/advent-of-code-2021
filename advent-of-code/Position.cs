@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace advent_of_code_2021
+namespace advent_of_code
 {
     public class Position
     {

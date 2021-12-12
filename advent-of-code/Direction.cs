@@ -1,4 +1,4 @@
-namespace advent_of_code_2021
+namespace advent_of_code
 {
     public static class Direction 
     {

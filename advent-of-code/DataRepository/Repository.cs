@@ -7,19 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace advent_of_code_2021.DataRepository
+namespace advent_of_code.DataRepository
 {
     public class Repository
     {
         private readonly ILogger logger;
         private string datapath;
+        private string testdatapath;
 
         public string[] depthMeasurements = null;  
         public string[] travelDirections = null;
         public string[] diagnostics = null;
         public string[] bingoInput = null;
+        public string[] hydrothermalVents = null;
 
-       
+
 
         public Repository(ILogger logger, string filepath = null)
         {
@@ -35,6 +37,7 @@ namespace advent_of_code_2021.DataRepository
             travelDirections = ReadLines(Path.Combine(datapath, "d02_position.txt"));
             diagnostics = ReadLines(Path.Combine(datapath, "d03_diagnostics.txt"));
             bingoInput = ReadLines(Path.Combine(datapath, "d04_bingo.txt"));
+            hydrothermalVents = ReadLines(Path.Combine(datapath, "d05_hydrothermal_vents.txt"));            
         }
 
 
